@@ -1,55 +1,89 @@
-Stress Detection in Reddit Posts (Dreaddit)
+```md
+# Stress Detection in Reddit Posts (Dreaddit)
 
-This repository contains a Jupyter Notebook project that builds and analyses machine learning models to detect stress signals in Reddit posts using the Dreaddit dataset. The notebook covers the full workflow from exploratory data analysis (EDA) to modelling, evaluation, interpretability, and ethical reflection in a mental health context.
+**Author:** Fong Kang Wei
 
-Repository Structure
+This repository contains a Jupyter Notebook project that builds and analyses machine learning models to detect stress signals in Reddit posts using the Dreaddit dataset. The notebook follows an end-to-end workflow: EDA → text-only baseline → model analysis → combined model → interpretability and ethics.
 
+---
+
+## Repository Structure
+
+```text
 .
 ├── README.md
 ├── requirements.txt
 ├── predicting-stress-from-social-media-text.ipynb
 └── data/
-  ├── dreaddit-train.csv
-  └── dreaddit-test.csv
+    ├── dreaddit-train.csv
+    └── dreaddit-test.csv
+```
 
-File / Folder Descriptions
- • predicting-stress-from-social-media-text.ipynb
+---
+
+## What’s Inside
+
+### predicting-stress-from-social-media-text.ipynb
 Main notebook containing:
- • Exploratory data analysis (dataset structure, label balance, subreddit composition, text length, sentiment, and selected lexical features)
- • Text-only baseline model (TF-IDF + Logistic Regression) with grid search and stratified cross-validation
- • Model evaluation on the held-out test set (F1-score, classification report, confusion matrix)
- • Model analysis (top predictive words, per-subreddit performance, qualitative error analysis, annotator confidence analysis)
- • Final combined model integrating TF-IDF text features with engineered psychological and behavioural features
- • data/
-Contains the Dreaddit dataset splits used in the project:
- • dreaddit-train.csv: training data
- • dreaddit-test.csv: held-out test data
- • requirements.txt
-Lists the Python packages required to run the notebook.
- • README.md
-Overview of the project, repository structure, and instructions to reproduce the results.
+- Exploratory Data Analysis (dataset structure, label balance, subreddit composition, text length, sentiment, selected LIWC/DAL features)
+- Text-only baseline model using TF-IDF + Logistic Regression  
+  - Grid search with stratified cross-validation  
+  - Evaluation on held-out test set (F1, classification report, confusion matrix)
+- Model analysis and sense-making  
+  - Top predictive lexical cues  
+  - Per-subreddit performance and stress prevalence analysis  
+  - Qualitative error analysis  
+  - Annotator confidence vs misclassifications
+- Final combined model using TF-IDF text + engineered features (LIWC, sentiment, readability, social metrics, text length)  
+  - Direct comparison against baseline, including error types and rates
 
-How to Reproduce / Run the Project
- 1. Create and activate a virtual environment (recommended)
+### data/
+- dreaddit-train.csv: training dataset
+- dreaddit-test.csv: held-out test dataset
+
+### requirements.txt
+List of Python dependencies required to run the notebook.
+
+---
+
+## How to Run / Reproduce
+
+### 1) Create a virtual environment (recommended)
 
 macOS / Linux:
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
 
 Windows (PowerShell):
+```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
- 2. Install dependencies
+```
+
+### 2) Install dependencies
+```bash
 pip install -r requirements.txt
- 3. Launch Jupyter Notebook
+```
+
+### 3) Launch Jupyter
+```bash
 jupyter notebook
- 4. Open and run the notebook
-Open:
-predicting-stress-from-social-media-text.ipynb
+```
 
-Run all cells from top to bottom to reproduce the full analysis, modelling pipeline, and results.
+### 4) Run the notebook
+Open `predicting-stress-from-social-media-text.ipynb` and run all cells from top to bottom to reproduce:
+- EDA visualisations and summary tables
+- Baseline model training and evaluation
+- Subreddit-level and error analyses
+- Combined model training and performance comparison
+- Feature importance and interpretability outputs
 
-Notes
- • The notebook uses the predefined Dreaddit train/test split to ensure fair and unbiased evaluation.
- • Hyperparameter tuning is performed only on the training data using stratified cross-validation.
- • The held-out test set is used strictly for final performance reporting and comparison between models.
+---
+
+## Notes
+- The predefined train/test split is used for fair and unbiased evaluation.
+- Hyperparameter tuning is performed only on the training set using stratified cross-validation.
+- The test set is reserved exclusively for final performance reporting and model comparison.
+```
