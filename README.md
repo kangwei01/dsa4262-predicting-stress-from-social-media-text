@@ -1,4 +1,4 @@
-```md
+````md
 # Stress Detection in Reddit Posts (Dreaddit)
 
 **Author:** Fong Kang Wei
@@ -9,7 +9,7 @@ This repository contains a Jupyter Notebook project that builds and analyses mac
 
 ## Repository Structure
 
-```text
+```
 .
 ├── README.md
 ├── requirements.txt
@@ -86,4 +86,3 @@ Open `predicting-stress-from-social-media-text.ipynb` and run all cells from top
 - The predefined train/test split is used for fair and unbiased evaluation.
 - Hyperparameter tuning is performed only on the training set using stratified cross-validation.
 - The test set is reserved exclusively for final performance reporting and model comparison.
-```
