@@ -1,88 +1,109 @@
-````md
-# Stress Detection in Reddit Posts (Dreaddit)
+# Stress Detection in Reddit Posts (Dreaddit)  
+**DSA4262 – Individual Assignment 2**
 
-**Author:** Fong Kang Wei
+This project develops and analyses interpretable machine learning models to detect stress signals in Reddit posts using the Dreaddit dataset. The workflow moves from exploratory data analysis to baseline modelling, detailed error and subgroup analyses, and finally a combined feature model that integrates psychological and behavioural indicators with textual features.
 
-This repository contains a Jupyter Notebook project that builds and analyses machine learning models to detect stress signals in Reddit posts using the Dreaddit dataset. The notebook follows an end-to-end workflow: EDA → text-only baseline → model analysis → combined model → interpretability and ethics.
+---
+
+## Project Overview
+
+Detecting stress from social media text is challenging because expressions of distress are often subtle, contextual, and narrative in nature. This project aims to build a transparent and methodologically rigorous modelling pipeline that not only achieves strong predictive performance but also explains *why* the model makes its decisions.
+
+The analysis proceeds in several stages:
+
+1. **Exploratory Data Analysis (EDA)**
+   - Inspect dataset structure, label balance, and subreddit composition  
+   - Analyse text length patterns, sentiment distributions, and selected psychological lexical features  
+   - Understand how stress expression varies across different online communities  
+
+2. **Text-Only Baseline Model**
+   - Build a TF-IDF + Logistic Regression classifier  
+   - Tune hyperparameters using grid search with stratified cross-validation  
+   - Establish an interpretable lexical baseline for stress detection  
+
+3. **Model Sense-Making Analyses**
+   - Identify top predictive lexical cues for stressed vs non-stressed posts  
+   - Compare performance across subreddits  
+   - Conduct qualitative error analysis (false positives and false negatives)  
+   - Examine the relationship between annotator confidence and misclassifications  
+
+4. **Combined Feature Model**
+   - Integrate engineered psychological and behavioural features (LIWC indicators, sentiment, readability, social metrics, text length) with TF-IDF text features  
+   - Evaluate whether these features provide incremental predictive value beyond raw language  
+   - Compare performance and error types against the baseline model  
+
+5. **Interpretability and Ethics**
+   - Analyse feature importance to understand the roles of lexical and engineered signals  
+   - Discuss implications of false positives and false negatives in mental health contexts  
+   - Reflect on responsible and human-in-the-loop deployment of stress detection systems  
 
 ---
 
 ## Repository Structure
-
 ```
 .
-├── README.md
-├── requirements.txt
-├── predicting-stress-from-social-media-text.ipynb
-└── data/
-    ├── dreaddit-train.csv
-    └── dreaddit-test.csv
+├── predicting-stress-from-social-media-text.ipynb   # Main analysis and modelling notebook
+├── data/
+│   ├── dreaddit-train.csv   # Training split of Dreaddit dataset
+│   └── dreaddit-test.csv    # Held-out test split
+│
+├── requirements.txt         # Python dependencies
+└── README.md
 ```
 
----
-
-## What’s Inside
-
-### predicting-stress-from-social-media-text.ipynb
-Main notebook containing:
-- Exploratory Data Analysis (dataset structure, label balance, subreddit composition, text length, sentiment, selected LIWC/DAL features)
-- Text-only baseline model using TF-IDF + Logistic Regression  
-  - Grid search with stratified cross-validation  
-  - Evaluation on held-out test set (F1, classification report, confusion matrix)
-- Model analysis and sense-making  
-  - Top predictive lexical cues  
-  - Per-subreddit performance and stress prevalence analysis  
-  - Qualitative error analysis  
-  - Annotator confidence vs misclassifications
-- Final combined model using TF-IDF text + engineered features (LIWC, sentiment, readability, social metrics, text length)  
-  - Direct comparison against baseline, including error types and rates
-
-### data/
-- dreaddit-train.csv: training dataset
-- dreaddit-test.csv: held-out test dataset
-
-### requirements.txt
-List of Python dependencies required to run the notebook.
+The Dreaddit dataset splits are included directly in the `data/` folder to allow full reproducibility of all analyses and results.
 
 ---
 
-## How to Run / Reproduce
+## Dataset
 
-### 1) Create a virtual environment (recommended)
+### Dreaddit: Stress Analysis Dataset  
+The Dreaddit dataset consists of Reddit posts labelled as **“Stressed”** or **“Not Stressed”**, along with annotator confidence scores and a range of pre-computed psychological, linguistic, and social features.
 
-macOS / Linux:
+It includes:
+- Raw post text
+- Stress labels and annotator confidence
+- Subreddit metadata
+- LIWC-based psychological lexical features
+- Sentiment scores
+- Readability and syntactic complexity measures
+- Social engagement metrics (e.g., upvote ratio, number of comments)
+
+A predefined train/test split is provided and used to ensure fair and unbiased model evaluation.
+
+---
+
+## How to Reproduce the Analysis
+
+### 1. Clone the repository
+
+### 2. Create a virtual environment
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+python -m venv venv
+source venv/bin/activate  # macOS/Linux
+# venv\Scripts\activate   # Windows
 ```
 
-Windows (PowerShell):
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-```
-
-### 2) Install dependencies
+### 3. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3) Launch Jupyter
+### 4. Run the notebook
 ```bash
-jupyter notebook
+jupyter notebook predicting-stress-from-social-media-text.ipynb
 ```
 
-### 4) Run the notebook
-Open `predicting-stress-from-social-media-text.ipynb` and run all cells from top to bottom to reproduce:
-- EDA visualisations and summary tables
-- Baseline model training and evaluation
-- Subreddit-level and error analyses
-- Combined model training and performance comparison
-- Feature importance and interpretability outputs
+Run all cells sequentially to reproduce:
+- EDA visualisations and summary statistics  
+- Baseline model training and evaluation  
+- Subreddit-level performance and error analyses  
+- Combined model training and comparison  
+- Feature importance and interpretability outputs  
 
 ---
 
-## Notes
-- The predefined train/test split is used for fair and unbiased evaluation.
-- Hyperparameter tuning is performed only on the training set using stratified cross-validation.
-- The test set is reserved exclusively for final performance reporting and model comparison.
+## Author
+
+**Fong Kang Wei**
+
